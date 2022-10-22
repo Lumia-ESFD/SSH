@@ -24,9 +24,9 @@ jobs:
       - name: Setup Debug Session
         uses: csexton/debugger-action@master
       - name: Uploadfiles
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
-          name: output.txt
+          name: MyArtifact
           path: ${GITHUB_WORKSPACE}/Outputs
       # Runs a single command using the runners shell
       - name: Run a one-line script
