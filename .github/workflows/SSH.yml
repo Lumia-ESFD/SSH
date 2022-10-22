@@ -20,13 +20,14 @@ jobs:
           sudo -E swapoff -a
           sudo -E rm -rf /usr/share/dotnet /etc/mysql /etc/php /usr/local/lib/android /opt/ghc /swapfile
           sudo -E mkdir ./Outputs
+          sudo -E chmod -R 777 Outputs
       - name: Setup Debug Session
         uses: csexton/debugger-action@master
       - name: Uploadfiles
         uses: actions/upload-artifact@v2
         with:
-          name: ${{github.event.inputs.Outputs}}-Outputs
-          path: ${GITHUB_WORKSPACE}
+          name: output.txt
+          path: ${GITHUB_WORKSPACE}/Outputs
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
