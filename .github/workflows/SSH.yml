@@ -1,48 +1,50 @@
 # This is a basic workflow to help you get started with Actions
 
-name: SSH ONLINE
-
-# Controls when the workflow will run
+name: SSH
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
-  # push:
-    # branches: [ main ]
-  # pull_request:
-    # branches: [ main ]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
             inputs:
-              OutPutFiles:
-                description: 'Output File Name'     
-                required: false
-                default: 'Output-files'
+              Outputs:
+                description: 'Input Output Name'     
+                required: true
+                default: 'Outputs'
   
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "Build-OpenWrt"
   Build-OpenWrt:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-20.04
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    runs-on: ubuntu-latest
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       
-      - name: Installation depends
+      - name: Initalize OS
+        env:
+          DEBIAN_FRONTEND: noninteractive
         run: |
-          sudo apt-get update
-          mkdir OutputFiles
-          mkdir WorkingSpace
+          sudo -E swapoff -a
+          sudo -E rm -rf /usr/share/dotnet /etc/mysql /etc/php /usr/local/lib/android /opt/ghc /swapfile
+	  sudo -E mkdir ./Outputs
 
-      # SSH Connect To Actions
+ SSH Connect To Actions
       - name: Setup Debug Session
         uses: csexton/debugger-action@master
-
-      # Upload firmware directory    
-      - name: Upload firmware directory
+        
+      - name: Upload Packages
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ github.event.inputs.OutPutFiles }}
-          path: OutputFiles/*
+          name: ${{github.event.inputs.Outputs}}-Packages
+          path: /home/runner/Outputs
+      
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo Hello, world!
+
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
+Footer
+© 2022 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
