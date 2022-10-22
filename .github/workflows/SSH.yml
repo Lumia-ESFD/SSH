@@ -8,43 +8,30 @@ on:
                 description: 'Input Output Name'     
                 required: true
                 default: 'Outputs'
-  
 jobs:
-  Build-OpenWrt:
+  MyCMD:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      
       - name: Initalize OS
         env:
           DEBIAN_FRONTEND: noninteractive
         run: |
           sudo -E swapoff -a
           sudo -E rm -rf /usr/share/dotnet /etc/mysql /etc/php /usr/local/lib/android /opt/ghc /swapfile
-	  sudo -E mkdir ./Outputs
-
- SSH Connect To Actions
+          sudo -E mkdir ./Outputs
       - name: Setup Debug Session
         uses: csexton/debugger-action@master
-        
-      - name: Upload Packages
+      - name: Uploadfiles
         uses: actions/upload-artifact@v2
         with:
           name: ${{github.event.inputs.Outputs}}-Packages
           path: /home/runner/Outputs
-      
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo Hello, world!
-
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
-Footer
-© 2022 GitHub, Inc.
-Footer navigation
-Terms
-Privacy
-Security
