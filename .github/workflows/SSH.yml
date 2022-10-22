@@ -11,15 +11,12 @@ on:
 jobs:
   MyJobs:
     runs-on: ubuntu-latest
-    
-    strategy:
-      matrix:
-        node-version: [10.x, 12.x, 14.x, 16.x, 18.x]
         
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 16
         
       - name: Initalize OS
         env:
@@ -32,8 +29,12 @@ jobs:
           sudo -E echo "set nu" > ~/.vimrc
       - name: Setup Debug Session
         uses: csexton/debugger-action@master
+        with:
+          node-version: 16
+          
       - name: Uploadfiles
         uses: actions/upload-artifact@v3
         with:
+          node-version: 16
           name: MyFiles
           path: ${{ github.workspace }}/Outputs/
