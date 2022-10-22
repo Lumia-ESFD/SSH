@@ -26,7 +26,6 @@ jobs:
       - name: Uploadfiles
         uses: actions/upload-artifact@v3
         with:
-          name: my-artifact
           path: ${GITHUB_WORKSPACE}/Outputs/*
       # Runs a single command using the runners shell
       - name: Run a one-line script
