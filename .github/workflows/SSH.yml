@@ -27,7 +27,7 @@ jobs:
           sudo -E echo "set nu" > ~/.vimrc
       
       - name: Setup Debug Session
-        uses: csexton/debugger-action@master
+        uses: csexton/debugger-action@main
           
       - name: Uploadfiles
         uses: actions/upload-artifact@v3
