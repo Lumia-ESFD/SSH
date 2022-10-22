@@ -15,8 +15,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          node-version: 16
         
       - name: Initalize OS
         env:
@@ -27,14 +25,12 @@ jobs:
           sudo -E mkdir ./Outputs
           sudo -E chmod -R 777 Outputs
           sudo -E echo "set nu" > ~/.vimrc
+      
       - name: Setup Debug Session
         uses: csexton/debugger-action@master
-        with:
-          node-version: 16
           
       - name: Uploadfiles
         uses: actions/upload-artifact@v3
         with:
-          node-version: 16
           name: MyFiles
           path: ${{ github.workspace }}/Outputs/
