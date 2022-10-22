@@ -9,7 +9,7 @@ on:
                 required: true
                 default: 'Outputs'
 jobs:
-  MyCMD:
+  MyJobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
