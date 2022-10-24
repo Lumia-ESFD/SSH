@@ -31,7 +31,8 @@ jobs:
       
       - name: make auto
         run: |
-          sudo -E cd ${{ github.workspace }}/openwrt/
+          sudo -E cd ./openwrt/
+          sudo -E make download -j8
           sudo -E make V=s -j$(nproc)
 
       - name: Last Setup Debug Session
