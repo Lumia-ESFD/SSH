@@ -31,6 +31,7 @@ jobs:
       
       - name: make auto
         run: |
+          cd /home/runner/OpenWRT
           sudo -E make download -j8
           sudo -E make V=s -j$(nproc)
 
