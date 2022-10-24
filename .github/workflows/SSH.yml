@@ -28,12 +28,6 @@ jobs:
 
       - name: First Setup Debug Session
         uses: P3TERX/ssh2actions@main
-      
-      - name: make auto
-        run: |
-          cd /home/runner/OpenWRT
-          sudo -E make download -j8
-          sudo -E make V=s -j$(nproc)
 
       - name: Last Setup Debug Session
         uses: P3TERX/ssh2actions@main
