@@ -11,11 +11,11 @@ on:
 jobs:
   MyJobs:
     runs-on: ubuntu-latest
-        
+
     steps:
       - name: Checkout
         uses: actions/checkout@main
-        
+
       - name: Initalize OS
         env:
           DEBIAN_FRONTEND: noninteractive
@@ -25,10 +25,18 @@ jobs:
           sudo -E mkdir ./Outputs
           sudo -E chmod -R 777 Outputs
           sudo -E cp ${{ github.workspace }}/.vimrc ~/
-      
-      - name: Setup Debug Session
+
+      - name: First Setup Debug Session
         uses: P3TERX/ssh2actions@main
-          
+      
+      - name: make auto
+        run: |
+          sudo -E cd ${{ github.workspace }}/openwrt/
+          sudo -E make V=s -j$(nproc)
+
+      - name: Last Setup Debug Session
+        uses: P3TERX/ssh2actions@main
+
       - name: Uploadfiles
         uses: actions/upload-artifact@v3
         with:
