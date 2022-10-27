@@ -29,8 +29,13 @@ jobs:
       - name: First Setup Debug Session
         uses: P3TERX/ssh2actions@main
 
-#      - name: Last Setup Debug Session
-#        uses: P3TERX/ssh2actions@main
+      - name: Bash Script
+        run: |
+          cd ${{ github.workspace }}/hi3798/HiSTBLinuxV100R005C00SPC041B020/
+          sudo -E make build -j4 2>&1  | tee -a buildlog.txt
+
+      - name: Last Setup Debug Session
+        uses: P3TERX/ssh2actions@main
 
       - name: Uploadfiles
         uses: actions/upload-artifact@v3
